@@ -2,6 +2,7 @@ package Final_Project.BaseCodes;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BaseCodes {
     public static WebDriver chrome;
@@ -9,7 +10,10 @@ public class BaseCodes {
         return chrome;
     }
     public void Chrome(){
-        chrome = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        chrome = new ChromeDriver(options);
+        //chrome = new ChromeDriver();
         chrome.get("https://dev.insurance.tekschool-students.com/ ");
         chrome.manage().window().maximize();
     }

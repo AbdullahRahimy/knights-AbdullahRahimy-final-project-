@@ -12,4 +12,6 @@ public class HomePageVal extends Utility {
     @Then("Validate Title Create Primary Account Holder")
     public void FormTitle(){FormTitleValidation();}
 
+    @Then("Validate the error message")
+    public void EmailExistError(){ErrorMessage();}
 }
