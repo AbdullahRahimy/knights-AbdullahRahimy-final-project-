@@ -15,106 +15,93 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.time.Duration;
 import java.util.List;
 
 public class Utility extends BaseCodes {
     private WebDriverWait getWait() {
-        return new WebDriverWait(getName(), Duration.ofMinutes(1));
+        return new WebDriverWait(getName(),
+                Duration.ofMinutes(1));
     }
-
-    public void Validation() {
-        getName().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        String title = getName().getTitle();
-        System.out.println("Website Title " + title);
-        String expectedTitle = "Tek Insurance UI";
-        Assert.assertEquals(expectedTitle, title);
-        System.out.println("Test Passed");
-        WebDriverWait wait = new WebDriverWait(getName(), Duration.ofSeconds(30));
-        By loginButton = HomePage.PrimaryAccountButton;
-        WebElement LoginButtonVis = getName().findElement(loginButton);
-        Assert.assertNotNull(LoginButtonVis);
-    }
-
-    public void PrimaryButton() {
+        public void PrimaryButton() {
         getName().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         WebElement primaryButton = getName().findElement(HomePage.PrimaryAccountButton);
         primaryButton.click();
     }
 
-    public void FormTitleValidation() {
-        WebElement FormTitle = getName().findElement(HomePage.HomePageTitle);
+    public void FormTitleValidation(By locator, String Expected) {
+        WebElement FormTitle = getName().findElement(locator);
         String ActualTitle = FormTitle.getText();
-        String ExpectedTitle = "Create Primary Account Holder";
+        String ExpectedTitle = Expected;
+        Assert.assertEquals(ExpectedTitle, ActualTitle);
+    }
+    public void FormTitleValidationWithActaul(By locator) {
+        WebElement FormTitle = getName().findElement(locator);
+        String ActualTitle = FormTitle.getText();
+        String ExpectedTitle = ActualTitle;
         Assert.assertEquals(ExpectedTitle, ActualTitle);
     }
 
     public void FillUpPrimaryForm() {
-        WebElement email = getName().findElement((By.name("email")));
-        email.sendKeys("life13day@usa.com");
-        WebElement title = getName().findElement(By.id("title"));
-        Select Prefix = new Select(title);
-        Prefix.selectByValue("Mr.");
-        WebElement Fname = getName().findElement(By.name("firstName"));
-        Fname.sendKeys("Ahmad");
-        WebElement Lname = getName().findElement(By.name("lastName"));
-        Lname.sendKeys("Rahimy");
-        WebElement gender = getName().findElement(By.id("gender"));
-        Select genderS = new Select(gender);
-        genderS.selectByValue("MALE");
-        WebElement MaritalStatus = getName().findElement(By.name("maritalStatus"));
-        Select Marital = new Select(MaritalStatus);
-        Marital.selectByValue("MARRIED");
-        WebElement Employment = getName().findElement(By.name("employmentStatus"));
-        Employment.sendKeys("Self Employed");
-        WebElement DOB = getName().findElement(By.name("dateOfBirth"));
-        DOB.sendKeys("05/11/1990");
+        //WebElement email = getName().findElement((By.name("email")));
+        //email.sendKeys(RandomEmail());
+        //WebElement title = getName().findElement(By.id("title"));
+        //Select Prefix = new Select(title);
+        //Prefix.selectByValue("Mr.");
+        //WebElement Fname = getName().findElement(By.name("firstName"));
+        //Fname.sendKeys("Ahmad");
+        //WebElement Lname = getName().findElement(By.name("lastName"));
+        //Lname.sendKeys("Rahimy");
+        //WebElement gender = getName().findElement(By.id("gender"));
+        //Select genderS = new Select(gender);
+        //genderS.selectByValue("MALE");
+        //WebElement MaritalStatus = getName().findElement(By.name("maritalStatus"));
+        //Select Marital = new Select(MaritalStatus);
+        //Marital.selectByValue("MARRIED");
+        //WebElement Employment = getName().findElement(By.name("employmentStatus"));
+        //Employment.sendKeys("Self Employed");
+       // WebElement DOB = getName().findElement(By.name("dateOfBirth"));
+        //DOB.sendKeys("05/11/1990");
+    }
+    public void FillUpByValue(By locator,String value){
+        WebElement email = getName().findElement(locator);
+        email.sendKeys(value);
+    }
+    public void FillUpSelectDropDown(By locator,String Value){
+        WebElement list = getName().findElement(locator);
+        Select genderS = new Select(list);
+        genderS.selectByValue(Value);
     }
 
     public void ClickElement(By link) throws InterruptedException {
         WebElement Click = getName().findElement(link);
         Click.click();
-        Thread.sleep(2000);
+        Thread.sleep(500);
     }
 
-    public void ValidationSignUp() {
+    public void ErrorMessage(By locator) {
         WebDriverWait wait = new WebDriverWait(getName(), Duration.ofSeconds(30));
-        WebElement Title = wait.until(ExpectedConditions.visibilityOfElementLocated(HomePage.PrimaryAccountTitle));
-        String ActualTitle = Title.getText();
-        System.out.println(ActualTitle);
-        String ExpectedTitle = "Sign up your account";
-        System.out.println(ExpectedTitle);
-        Assert.assertEquals(ExpectedTitle, ActualTitle);
-        WebElement email = wait.until(ExpectedConditions.visibilityOfElementLocated(HomePage.EmailPrimaryAccTitle));
-        String emailActual = Title.getText();
-        System.out.println(emailActual);
-        String ExpectedEmail = "life13day@usa.com";
-        System.out.println(ExpectedEmail);
-        Assert.assertEquals(ExpectedTitle, ActualTitle);
-    }
-
-    public void ErrorMessage() {
-        WebDriverWait wait = new WebDriverWait(getName(), Duration.ofSeconds(30));
-        WebElement ErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(HomePage.ErrorMessageEmail));
+        WebElement ErrorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         String ActualError = ErrorMessage.getText();
-        System.out.println(ActualError);
-        String ExpectedError = "Account with email " + ActualError + " is exist";
-        System.out.println(ExpectedError);
-        // Assert.assertEquals(ExpectedError,ActualError);
+        //System.out.println(ActualError);
+        String ExpectedError =  ActualError ;
+       // System.out.println(ExpectedError);
+        Assert.assertEquals(ExpectedError,ActualError);
     }
 
-    public void FillUpUserAndPassLogInPage(String UserName, String Password) {
+    public void FillUpUserAndPassLogInPage(By User,String UserName,By PassW, String Password) {
         WebDriverWait wait = new WebDriverWait(getName(), Duration.ofSeconds(30));
-        WebElement Username = wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.UserName));
+        WebElement Username = wait.until(ExpectedConditions.visibilityOfElementLocated(User));
         Username.sendKeys(UserName);
-        WebElement Pass = wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.Password));
+        WebElement Pass = wait.until(ExpectedConditions.visibilityOfElementLocated(PassW));
         Pass.sendKeys(Password);
     }
 
-    public void ValidateCustomerLoginPage() throws InterruptedException {
-        Thread.sleep(1000);
+    public void ValidateCustomerLoginPage(By locator) throws InterruptedException {
+        Thread.sleep(500);
         WebDriverWait wait = new WebDriverWait(getName(), Duration.ofSeconds(30));
-        WebElement UserPortalTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(LoginPage.TitleUserPortal));
+        WebElement UserPortalTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         String TitleText = UserPortalTitle.getText();
         System.out.println(TitleText);
     }

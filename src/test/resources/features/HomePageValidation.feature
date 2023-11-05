@@ -1,4 +1,4 @@
-
+@Regression
 Feature: Validation of Title and Login Button
   Scenario: Navigate and Validate
     When Validate Title and Login Button
@@ -15,6 +15,6 @@ Feature: Validation of Title and Login Button
   @smoke
   Scenario: Validate error Message with existing email
     When Click to Primary Account Button
-    And Fill Up the Form
+    And Fill Up the Form with Existed Email
     Then Click Create Account
     And Validate the error message

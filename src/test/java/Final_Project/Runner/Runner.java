@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "classpath:features",
         glue = "Final_Project.Steps",
-        tags = "@US_11",
+        tags = "@Regression",
         plugin = "html:target/html_report/report.html"
 )
 public class Runner {

@@ -1,3 +1,4 @@
+@Regression
 Feature: Login and Message Validation
 
   Scenario: Login and SignIn

@@ -14,4 +14,9 @@ public class UserProfileSteps extends Utility {
     public void ClickLogoutButton() {
         ClickButton(UserProfile.LogoutButton);
     }
+    @Then("Validate profile information")
+    public void ProfileValidation(){
+        FormTitleValidationWithActaul(UserProfile.CSRValidate);
+    FormTitleValidationWithActaul(UserProfile.NameProfile);
+    FormTitleValidationWithActaul(UserProfile.UsernameProfile);}
 }

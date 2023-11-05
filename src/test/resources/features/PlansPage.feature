@@ -1,3 +1,4 @@
+@Regression
 Feature: Navigate to Plans page with Valid USR
 @US_10
   Scenario: Navigate and validate Customer service portal and 4 data present in plans
@@ -17,4 +18,4 @@ Feature: Navigate to Plans page with Valid USR
 
     Examples:
     |CreatedDate|ExpiryDate|
-    |October 31, 2023|November 1, 2023|
+    |November 5, 2023|November 6, 2023|

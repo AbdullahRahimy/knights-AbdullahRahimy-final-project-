@@ -12,7 +12,7 @@ public class Login extends Utility {
     public void ClickLogin() throws InterruptedException {ClickElement(LoginPage.LoginButton);}
     @When("Login with username as {string} and password as {string}")
     public void loginWithUserAndPassword(String User, String Pass) {
-        FillUpUserAndPassLogInPage(User,Pass);
+        FillUpUserAndPassLogInPage(LoginPage.UserName,User,LoginPage.Password,Pass);
     }
     @Then("Click SignIn Button")
     public void clickSignInButton() throws InterruptedException {
@@ -20,7 +20,7 @@ public class Login extends Utility {
     }
     @Then("Validate User Navigate to Customer Service Portal")
     public void validateCustomerServicePortal() throws InterruptedException {
-        ValidateCustomerLoginPage();
+        ValidateCustomerLoginPage(LoginPage.TitleUserPortal);
     }
     @Then("Validate Error Message")
     public void ErrorValidationLoginPage(){WrongEmailOrPassErrorLoginPage(LoginPage.PassError);}
